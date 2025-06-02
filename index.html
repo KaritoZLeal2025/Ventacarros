@@ -3,9 +3,633 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="Carros.css">
     <title>Concesionario de Vehículos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .top-bar {
+            background-color: #000;
+            color: white;
+            padding: 12px 0;
+            font-size: 12px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .left-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-left: 15%;
+        }
+
+        .left-links a {
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-right: 10px;
+        }
+
+        .social-links img {
+            width: 15px;
+            height: 15px;
+        }
+
+        .user-auth-container {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .auth-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            
+        }
+
+        .user-icon img {
+    width: 24px;
+    margin-right: 50px;
    
+}
+
+
+        .login {
+            color: #f5f5f5;
+            text-decoration: none;
+        }
+
+        .separator {
+            color: #979494;
+        }
+
+        .main-nav {
+            background: transparent;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+            padding: 15px 0;
+        }
+
+        .main-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-commercial {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-left: 20px;
+        }
+
+        .logo-vehicles {
+            color: #ffd10b;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-left: 150px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: 16px;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .main-btn {
+            background-color: #ffd10b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+
+        .hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            background-image: url('foto1.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-stats {
+            position: absolute;
+            left: 7%;
+            z-index: 2;
+        }
+
+        .stat-number {
+            color: #ffd10b;
+            font-size: 72px;
+            font-weight: bold;
+            line-height: 0.9;
+        }
+
+        .stat-plus {
+            color: #ffd10b;
+            font-size: 72px;
+            display: inline;
+        }
+
+        .stat-text {
+            color: white;
+            font-size: 24px;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        .filter-container {
+            position: relative;
+            margin: -70px auto 0;
+            max-width: 1200px;
+            padding: 0 15px;
+        }
+
+        .tabs-container {
+            display: flex;
+            margin-bottom: -1px;
+            z-index: 2;
+        }
+
+        .condition-tab {
+            color: white;
+            border: none;
+            padding: 15px 45px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            background: none;
+        }
+
+        .condition-tab.active {
+            background: black;
+            color: white;
+        }
+
+        .search-container {
+            background-color: black;
+            padding: 35px;
+            position: relative;
+            width: 100%;
+        }
+
+        .search-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .search-item {
+            color: #999;
+            padding: 10px;
+            background: #f0f0f0;
+            text-align: left;
+            font-size: 13px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 220px;
+           
+        }
+
+        .search-button {
+            background: #ffd10b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+            height: 40px;
+            width: 150px;
+        }
+
+        .body2 {
+            padding: 30px 0;
+            background-color: white;
+            color: black;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        
+        .header2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .view-btn {
+            background-color: #ffd10b;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-point {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #ffd10b;
+}
+
+
+
+
+        .cars-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .car-entry {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .carphoto img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .car-model {
+            font-weight: bold;
+            margin: 10px 0 5px;
+            font-size: 15px;
+        }
+
+        .car-year {
+            color: #000;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .contenedor-precio {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .linea {
+            width: 100%;
+            height: 1px;
+            background-color: #c4bfbf;
+            margin: 5px 0;
+        }
+
+        .bottonprecio {
+            background-color: #ffd10b;
+            border: none;
+            padding: 5px 15px;
+            position: absolute;
+            right: 0;
+            top: -35px;
+            font-weight: bold;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .price-button {
+            background-color: #ffd10b;
+            border: none;
+            padding: 5px 15px;
+            font-weight: bold;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            top: -35px;
+        }
+
+        .old-price {
+            color: #333;
+            font-size: 12px;
+            text-decoration: line-through;
+            display: block;
+        }
+
+        .new-price {
+            color: white;
+            font-size: 15px;
+            font-weight: 800;
+            display: block;
+        }
+
+        .car-details {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .ver-mas-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .vermas {
+            border: none;
+            background-color: #ffd10b;
+            padding: 10px 20px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+        }
+
+        .banner-section {
+            position: relative;
+            height: 340px;
+             background-image: url("carrobanner2.png");
+             background-size: cover;
+    background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .banner-content {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .banner-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .banner-icon {
+            font-size: 45px;
+            color: #ffd10b;
+        }
+
+        .banner-text-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .banner-text {
+            color: white;
+            font-size: 42px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .banner-subtext {
+            color: #ccc;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .news-section {
+            padding: 30px 0;
+        }
+
+        .news-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+      .news-article {
+    display: flex
+;
+    flex-direction: column;
+}
+
+        .article-image-container {
+         
+             background-size: cover;
+    background-position: center;
+        }
+        
+
+
+        .article-image {
+    width: 92%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin-left: 12px;
+}
+
+        .article-content {
+    border: 1px solid #e0e0e0;
+    padding: 32px;
+    flex-grow: 1;
+   margin-right: 15px;
+    margin-left: 11px;
+    margin-top: 10px;
+    margin-bottom: 90px;
+    padding-bottom: 20px;
+}
+
+.divider-line {
+    height: 0.5px;
+    background-color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+        .article-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    
+    color: #333;
+}
+
+        .article-meta {
+    display: flex
+;
+    gap: 15px;
+    font-size: 13px;
+    color: #666;
+    justify-content: center;
+}
+        .custom-footer {
+            background-color: #000;
+            color: #fff;
+            padding: 30px 0 20px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            margin-bottom: 20px;
+        }
+
+        .footer-search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            
+        }
+
+        .search-box input {
+            background: #222;
+            border: 1px solid #444;
+            padding: 8px 15px;
+            color: white;
+            width: 200px;
+            margin-left: 20px;
+        }
+
+        .search-arrow {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-link {
+            color: #fff;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background-color: #333;
+            width: 90%;
+            margin: 0 auto 20px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons img {
+            width: 15px;
+            height: 15px;
+        }
+    </style>
 </head>
 <body>
 
@@ -359,4 +983,3 @@
     </footer>
 </body>
 </html>
-   
